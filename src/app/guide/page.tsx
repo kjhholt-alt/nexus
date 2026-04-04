@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import {
   BookOpen, Package, Lightbulb, Wrench, Server, Phone, Bot, Search,
   FileSearch, Rocket, FileText, ArrowRight, Sparkles, Terminal,
@@ -73,16 +72,16 @@ const ARCHITECTURE = [
   { icon: <Terminal className="w-5 h-5" />, name: "WezTerm", desc: "3-pane agent terminal", color: "text-sky-400", detail: "Claude 1 + Claude 2 + Codex" },
 ];
 
-function Section({ title, icon, children, delay = 0 }: { title: string; icon: React.ReactNode; children: React.ReactNode; delay?: number }) {
+function Section({ title, icon, children }: { title: string; icon: React.ReactNode; children: React.ReactNode; delay?: number }) {
   return (
-    <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay }}>
+    <section>
       <div className="flex items-center gap-2 mb-3">
         {icon}
         <h2 className="text-sm font-semibold text-zinc-300 uppercase tracking-wider">{title}</h2>
         <div className="flex-1 h-px bg-zinc-800/50" />
       </div>
       {children}
-    </motion.section>
+    </section>
   );
 }
 
@@ -91,7 +90,7 @@ export default function GuidePage() {
     <div className="min-h-screen relative" style={{ backgroundColor: "#0a0a0f" }}>
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
         {/* Header */}
-        <motion.header initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
+        <header
           className="text-center py-8">
           <div className="inline-flex p-3 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 mb-4">
             <BookOpen className="w-8 h-8 text-cyan-400" />
@@ -101,7 +100,7 @@ export default function GuidePage() {
             One app. Every product. Every agent. Every metric.
             Here&apos;s how everything connects.
           </p>
-        </motion.header>
+        </header>
 
         {/* The Flow — Visual Pipeline */}
         <Section title="The Flow: Idea → Revenue" icon={<Zap className="w-4 h-4 text-amber-400" />} delay={0.1}>
@@ -276,12 +275,12 @@ export default function GuidePage() {
         </Section>
 
         {/* Footer */}
-        <motion.footer initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
+        <footer
           className="text-center py-8 border-t border-zinc-800/50">
           <p className="text-[10px] text-zinc-700 uppercase tracking-widest">
             NEXUS — BuildKit Command Center — April 2026
           </p>
-        </motion.footer>
+        </footer>
       </div>
     </div>
   );

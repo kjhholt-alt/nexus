@@ -48,7 +48,7 @@ interface RevenueData {
   totalRevenue: number;
 }
 
-function ProductCard({ product, index }: { product: Product; index: number }) {
+function ProductCard({ product, index, onSpawn }: { product: Product; index: number; onSpawn: (p: Product) => void }) {
   const tier = TIER_CONFIG[product.tier];
   const status = STATUS_CONFIG[product.status];
   const borderColor = PRODUCT_COLORS[product.color] || PRODUCT_COLORS.cyan;
@@ -135,7 +135,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             <GitBranch className="w-3 h-3" /> Repo
           </a>
         )}
-        <button className="flex items-center gap-1 px-2 py-1 text-[10px] text-amber-400 hover:bg-amber-500/10 rounded transition-colors ml-auto">
+        <button onClick={() => onSpawn(product)} className="flex items-center gap-1 px-2 py-1 text-[10px] text-amber-400 hover:bg-amber-500/10 rounded transition-colors ml-auto">
           <Sparkles className="w-3 h-3" /> Spawn Agent
         </button>
       </div>
@@ -147,6 +147,9 @@ export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [revenue, setRevenue] = useState<RevenueData>({ totalMRR: 0, totalRevenue: 0 });
   const [loading, setLoading] = useState(true);
+  const [spawnTarget, setSpawnTarget] = useState<Product | null>(null);
+  const [spawnGoal, setSpawnGoal] = useState("");
+  const [spawning, setSpawning] = useState(false);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -166,6 +169,28 @@ export default function ProductsPage() {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+
+  async function spawnAgent() {
+    if (!spawnTarget || !spawnGoal.trim()) return;
+    setSpawning(true);
+    try {
+      const res = await fetch("/api/spawn", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          goal: spawnGoal,
+          project: spawnTarget.name.toLowerCase().replace(/\s+/g, "-"),
+          priority: spawnTarget.tier === "launch-now" ? 80 : spawnTarget.tier === "build-next" ? 60 : 40,
+          worker_type: "builder",
+        }),
+      });
+      if (res.ok) {
+        setSpawnTarget(null);
+        setSpawnGoal("");
+      }
+    } catch { /* silent */ }
+    setSpawning(false);
+  }
 
   const tiers = ["launch-now", "build-next", "opportunistic", "parked"] as const;
   const totalMRR = products.reduce((sum, p) => sum + Number(p.mrr), 0);
@@ -251,12 +276,57 @@ export default function ProductsPage() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                 {tierProducts.map((product, i) => (
-                  <ProductCard key={product.id} product={product} index={i} />
+                  <ProductCard key={product.id} product={product} index={i} onSpawn={setSpawnTarget} />
                 ))}
               </div>
             </section>
           );
         })}
+
+        {/* Spawn Agent Modal */}
+        {spawnTarget && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setSpawnTarget(null)}>
+            <div className="bg-zinc-900 border border-cyan-500/30 rounded-xl p-6 w-full max-w-lg space-y-4" onClick={e => e.stopPropagation()}>
+              <div className="flex items-center gap-3">
+                <div className={`p-2 rounded-lg border ${COLOR_BG[spawnTarget.color] || COLOR_BG.cyan}`}>
+                  <span className={COLOR_TEXT[spawnTarget.color] || COLOR_TEXT.cyan}>
+                    {ICON_MAP[spawnTarget.icon] || <Package className="w-5 h-5" />}
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-white">Spawn Agent for {spawnTarget.name}</h3>
+                  <p className="text-[10px] text-zinc-500">{spawnTarget.tagline}</p>
+                </div>
+              </div>
+              {spawnTarget.next_milestone && (
+                <div className="text-[10px] text-zinc-400 bg-zinc-800/50 rounded-lg px-3 py-2">
+                  <span className="text-amber-400">Next milestone:</span> {spawnTarget.next_milestone}
+                </div>
+              )}
+              <textarea
+                value={spawnGoal}
+                onChange={e => setSpawnGoal(e.target.value)}
+                placeholder={`What should the agent do for ${spawnTarget.name}? e.g. "${spawnTarget.next_milestone || 'Build the MVP'}"`}
+                rows={3}
+                className="w-full bg-zinc-800/50 border border-zinc-700/50 rounded-lg px-3 py-2 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-cyan-500/50"
+                autoFocus
+              />
+              <div className="flex justify-end gap-2">
+                <button onClick={() => setSpawnTarget(null)} className="px-4 py-2 text-[10px] text-zinc-400 hover:text-white transition-colors">
+                  Cancel
+                </button>
+                <button
+                  onClick={spawnAgent}
+                  disabled={spawning || !spawnGoal.trim()}
+                  className="flex items-center gap-1.5 px-4 py-2 text-[10px] uppercase tracking-wider text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 rounded-lg hover:bg-cyan-500/20 transition-colors disabled:opacity-50"
+                >
+                  <Sparkles className="w-3.5 h-3.5" />
+                  {spawning ? "Spawning..." : "Spawn Agent"}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Empty state */}
         {!loading && products.length === 0 && (
