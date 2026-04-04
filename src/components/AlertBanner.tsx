@@ -145,12 +145,7 @@ export function AlertBanner() {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -12 }}
       transition={{ duration: 0.3 }}
-      className="fixed top-10 left-0 right-0 z-[90] px-3 py-1.5 space-y-1.5"
-      style={{
-        background:
-          "linear-gradient(to bottom, rgba(10,10,15,0.95) 0%, rgba(10,10,15,0.8) 80%, transparent 100%)",
-        backdropFilter: "blur(8px)",
-      }}
+      className="px-3 py-1.5 space-y-1.5"
     >
       <AnimatePresence mode="popLayout">
         {sorted.map((alert) => (
