@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { motion } from "framer-motion";
 import {
   Lightbulb, Plus, RefreshCw, ArrowUpRight, X, Check,
   TrendingUp, Target, Sparkles, Archive,
@@ -75,8 +74,7 @@ export default function IdeasPage() {
     <div className="min-h-screen relative" style={{ backgroundColor: "#0a0a0f" }}>
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
         {/* Header */}
-        <motion.header initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
-          className="flex items-center justify-between">
+        <header className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20">
               <Lightbulb className="w-6 h-6 text-amber-400" />
@@ -102,12 +100,11 @@ export default function IdeasPage() {
               <RefreshCw className={`w-4 h-4 text-zinc-400 ${loading ? "animate-spin" : ""}`} />
             </button>
           </div>
-        </motion.header>
+        </header>
 
         {/* New Idea Form */}
         {showNew && (
-          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }}
-            className="bg-zinc-900/80 border border-emerald-500/20 rounded-xl p-4 space-y-3">
+          <div className="bg-zinc-900/80 border border-emerald-500/20 rounded-xl p-4 space-y-3">
             <input
               value={newIdea.title}
               onChange={e => setNewIdea(prev => ({ ...prev, title: e.target.value }))}
@@ -160,11 +157,11 @@ export default function IdeasPage() {
                 <Check className="w-3 h-3" /> Save
               </button>
             </div>
-          </motion.div>
+          </div>
         )}
 
         {/* Stats */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}
+        <div
           className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div className="bg-zinc-900/50 border border-amber-500/20 rounded-xl p-4">
             <div className="flex items-center gap-2 mb-1">
@@ -196,10 +193,10 @@ export default function IdeasPage() {
             </div>
             <div className="text-2xl font-bold text-red-400">{killed.length}</div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Ideas List */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
+        <div
           className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl overflow-hidden">
           <div className="px-4 py-3 border-b border-zinc-800/50 flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-amber-400" />
@@ -258,11 +255,11 @@ export default function IdeasPage() {
               })
             )}
           </div>
-        </motion.div>
+        </div>
 
         {/* Promoted & Killed sections */}
         {promoted.length > 0 && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
+          <div
             className="bg-zinc-900/50 border border-purple-500/20 rounded-xl overflow-hidden">
             <div className="px-4 py-3 border-b border-zinc-800/50 flex items-center gap-2">
               <TrendingUp className="w-4 h-4 text-purple-400" />
@@ -279,11 +276,11 @@ export default function IdeasPage() {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         )}
 
         {killed.length > 0 && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
+          <div
             className="bg-zinc-900/50 border border-zinc-800/30 rounded-xl overflow-hidden">
             <div className="px-4 py-3 border-b border-zinc-800/50 flex items-center gap-2">
               <Archive className="w-4 h-4 text-zinc-600" />
@@ -299,7 +296,7 @@ export default function IdeasPage() {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         )}
       </div>
     </div>

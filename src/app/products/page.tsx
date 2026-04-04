@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { motion } from "framer-motion";
 import {
   Package, DollarSign, Users, TrendingUp, RefreshCw, Plus,
   Wrench, Server, Phone, Bot, Search, FileSearch, Rocket, FileText,
@@ -55,11 +54,9 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
   const borderColor = PRODUCT_COLORS[product.color] || PRODUCT_COLORS.cyan;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.05 }}
-      className={`group bg-zinc-900/50 border ${borderColor} rounded-xl overflow-hidden transition-all duration-300 hover:bg-zinc-900/80`}
+    <div
+      className={`group bg-zinc-900/50 border ${borderColor} rounded-xl overflow-hidden transition-all duration-300 hover:bg-zinc-900/80 animate-in fade-in slide-in-from-bottom-2`}
+      style={{ animationDelay: `${index * 50}ms`, animationFillMode: "both" }}
     >
       {/* Header */}
       <div className="px-4 py-3 flex items-center gap-3">
@@ -142,7 +139,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           <Sparkles className="w-3 h-3" /> Spawn Agent
         </button>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -180,8 +177,7 @@ export default function ProductsPage() {
     <div className="min-h-screen relative" style={{ backgroundColor: "#0a0a0f" }}>
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
         {/* Header */}
-        <motion.header initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
-          className="flex items-center justify-between">
+        <header className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/20">
               <Package className="w-6 h-6 text-cyan-400" />
@@ -203,11 +199,10 @@ export default function ProductsPage() {
               <RefreshCw className={`w-4 h-4 text-zinc-400 ${loading ? "animate-spin" : ""}`} />
             </button>
           </div>
-        </motion.header>
+        </header>
 
         {/* Top Stats */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div className="bg-zinc-900/50 border border-emerald-500/20 rounded-xl p-4">
             <div className="flex items-center gap-2 mb-1">
               <DollarSign className="w-4 h-4 text-emerald-400" />
@@ -236,7 +231,7 @@ export default function ProductsPage() {
             </div>
             <div className="text-2xl font-bold text-amber-400">{buildingCount}</div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Product Grid by Tier */}
         {tiers.map((tierKey) => {
@@ -245,7 +240,7 @@ export default function ProductsPage() {
           const config = TIER_CONFIG[tierKey];
 
           return (
-            <motion.section key={tierKey} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
+            <section key={tierKey}>
               <div className="flex items-center gap-2 mb-3">
                 <div className={`w-2 h-2 rounded-full ${config.bg.replace("bg-", "bg-").replace("/10", "")}`} />
                 <h2 className={`text-xs font-semibold uppercase tracking-wider ${config.text}`}>
@@ -259,7 +254,7 @@ export default function ProductsPage() {
                   <ProductCard key={product.id} product={product} index={i} />
                 ))}
               </div>
-            </motion.section>
+            </section>
           );
         })}
 
