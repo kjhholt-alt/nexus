@@ -3,6 +3,21 @@
 import { useEffect, useState } from "react";
 import { Shield } from "lucide-react";
 
+function useClaudeUsage() {
+  const [pct, setPct] = useState<number | null>(null);
+  useEffect(() => {
+    const load = () =>
+      fetch("/api/claude-usage", { cache: "no-store" })
+        .then((r) => r.json())
+        .then((d) => { if (typeof d.session_pct === "number") setPct(d.session_pct); })
+        .catch(() => {});
+    load();
+    const id = setInterval(load, 60_000);
+    return () => clearInterval(id);
+  }, []);
+  return pct;
+}
+
 interface StatusRibbonProps {
   connected: boolean;
   activeAgents: number;
@@ -44,6 +59,7 @@ export function StatusRibbon({
   onCommandOpen,
 }: StatusRibbonProps) {
   const [clock, setClock] = useState("");
+  const claudePct = useClaudeUsage();
 
   useEffect(() => {
     const tick = () => {
@@ -125,6 +141,40 @@ export function StatusRibbon({
         <Metric label="COST" value={`$${totalCost.toFixed(2)}`} />
         <Divider />
         <Metric label="TOKENS" value={formatTokens(totalTokens)} />
+        {claudePct !== null && (
+          <>
+            <Divider />
+            <a
+              href="/costs"
+              title={`Claude session: ${claudePct}% used`}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 5,
+                textDecoration: "none",
+                cursor: "pointer",
+              }}
+            >
+              <span style={{ color: "#64748b", fontSize: 10, fontWeight: 500, letterSpacing: "0.08em" }}>
+                CLAUDE
+              </span>
+              <div style={{ width: 36, height: 4, background: "#1a2235", borderRadius: 2, overflow: "hidden" }}>
+                <div
+                  style={{
+                    height: "100%",
+                    width: `${Math.min(100, claudePct)}%`,
+                    background: claudePct >= 80 ? "#ef4444" : claudePct >= 60 ? "#f59e0b" : "#3b82f6",
+                    borderRadius: 2,
+                    transition: "width 0.3s",
+                  }}
+                />
+              </div>
+              <span style={{ color: "#e2e8f0", fontSize: 11, fontWeight: 700, fontVariantNumeric: "tabular-nums" }}>
+                {claudePct}%
+              </span>
+            </a>
+          </>
+        )}
       </div>
 
       {/* ── RIGHT: clock + command hint ── */}
