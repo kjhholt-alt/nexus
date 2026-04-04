@@ -79,27 +79,8 @@ export function AgentCard({ agent }: AgentCardProps) {
       : "shadow-red-500/10";
 
   return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{
-        opacity: 1,
-        scale: 1,
-        ...(isCompleted
-          ? {
-              borderColor: ["rgba(16,185,129,0.4)", "rgba(16,185,129,0.8)", "rgba(16,185,129,0.4)"],
-              transition: { borderColor: { duration: 0.6 } },
-            }
-          : {}),
-        ...(isFailed
-          ? {
-              borderColor: ["rgba(239,68,68,0.4)", "rgba(239,68,68,0.8)", "rgba(239,68,68,0.4)"],
-              transition: { borderColor: { duration: 0.6 } },
-            }
-          : {}),
-      }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      className={`relative border ${borderColor} rounded-xl bg-zinc-900/80 backdrop-blur-md p-5 shadow-lg ${glowColor} overflow-hidden`}
+    <div
+      className={`relative border ${borderColor} rounded-xl bg-zinc-900/80 backdrop-blur-md p-5 shadow-lg ${glowColor} overflow-hidden transition-colors duration-300`}
     >
       {/* Scanline overlay */}
       <div className="absolute inset-0 pointer-events-none scanline-overlay opacity-[0.03]" />
@@ -155,11 +136,9 @@ export function AgentCard({ agent }: AgentCardProps) {
             <span>{progress}%</span>
           </div>
           <div className="h-1.5 bg-zinc-800 rounded-full overflow-hidden">
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: `${progress}%` }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className={`h-full rounded-full ${
+            <div
+              style={{ width: `${progress}%` }}
+              className={`h-full rounded-full transition-all duration-500 ease-out ${
                 isRunning
                   ? "bg-gradient-to-r from-cyan-500 to-cyan-300 shadow-[0_0_10px_rgba(0,200,255,0.5)]"
                   : isCompleted
@@ -189,11 +168,7 @@ export function AgentCard({ agent }: AgentCardProps) {
 
       {/* Output log */}
       {agent.output && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          className="relative z-10 mt-2"
-        >
+        <div className="relative z-10 mt-2">
           <div
             className={`text-xs font-mono p-3 rounded-lg border ${
               isCompleted
@@ -203,7 +178,7 @@ export function AgentCard({ agent }: AgentCardProps) {
           >
             {agent.output}
           </div>
-        </motion.div>
+        </div>
       )}
 
       {/* Status badge */}
@@ -229,6 +204,6 @@ export function AgentCard({ agent }: AgentCardProps) {
           {agent.status}
         </span>
       </div>
-    </motion.div>
+    </div>
   );
 }

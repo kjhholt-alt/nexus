@@ -155,9 +155,7 @@ export function DaemonPanel() {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+    <div
       className={`bg-zinc-900/50 border ${cfg.border} rounded-xl overflow-hidden transition-colors`}
     >
       {/* Header — always visible */}
@@ -298,6 +296,6 @@ export function DaemonPanel() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 }

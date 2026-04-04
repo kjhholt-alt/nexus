@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+
 import { Clock } from "lucide-react";
 import { SessionList } from "@/components/session-list";
 
@@ -12,9 +12,7 @@ export default function SessionsPage() {
     >
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
         {/* Header */}
-        <motion.header
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+        <header
           className="flex items-center gap-4"
         >
           <div className="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/20">
@@ -26,16 +24,12 @@ export default function SessionsPage() {
               Every Claude Code session tracked with costs & tokens
             </p>
           </div>
-        </motion.header>
+        </header>
 
         {/* Session list */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.1 }}
-        >
+        <div>
           <SessionList />
-        </motion.div>
+        </div>
       </div>
     </div>
   );

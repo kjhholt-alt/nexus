@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { Satellite, Users, Play, CheckCircle, DollarSign, Network, Shield } from "lucide-react";
 import Link from "next/link";
 import type { OpsWorker, OpsTask, OpsBudget } from "@/lib/ops-types";
@@ -120,9 +119,7 @@ export function StatusRibbon({ workers, tasks, budget, connected, lastUpdated }:
     : "$0.00";
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
+    <div
       className="flex items-center justify-between px-4 py-2 rounded-lg border border-zinc-800/60"
       style={{ background: "rgba(10,10,18,0.9)", backdropFilter: "blur(12px)" }}
     >
@@ -206,6 +203,6 @@ export function StatusRibbon({ workers, tasks, budget, connected, lastUpdated }:
           Updated {formatTimeAgo(lastUpdated.toISOString())}
         </span>
       </div>
-    </motion.div>
+    </div>
   );
 }

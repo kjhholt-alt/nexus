@@ -83,10 +83,7 @@ export function BottomBar({ budget, onDeploySwarm }: Props) {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.3 }}
+    <div
       className="rounded-lg border border-zinc-800/60 p-3"
       style={{ background: "rgba(10,10,18,0.9)", backdropFilter: "blur(12px)" }}
     >
@@ -194,6 +191,6 @@ export function BottomBar({ budget, onDeploySwarm }: Props) {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 }

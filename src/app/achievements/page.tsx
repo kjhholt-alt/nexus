@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+
 import {
   Trophy,
   Rocket,
@@ -73,9 +73,7 @@ export default function AchievementsPage() {
     >
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
         {/* Header */}
-        <motion.header
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+        <header
           className="flex items-center gap-4"
         >
           <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20">
@@ -87,7 +85,7 @@ export default function AchievementsPage() {
               {counts.unlocked}/{counts.total} unlocked
             </p>
           </div>
-        </motion.header>
+        </header>
 
         {/* Progress bar */}
         <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl p-4">
@@ -101,13 +99,11 @@ export default function AchievementsPage() {
             </span>
           </div>
           <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{
+            <div
+              style={{
                 width: `${counts.total > 0 ? (counts.unlocked / counts.total) * 100 : 0}%`,
               }}
-              transition={{ duration: 1, delay: 0.3 }}
-              className="h-full bg-gradient-to-r from-amber-500 to-yellow-400 rounded-full"
+              className="h-full bg-gradient-to-r from-amber-500 to-yellow-400 rounded-full transition-all duration-1000"
             />
           </div>
         </div>
@@ -119,22 +115,16 @@ export default function AchievementsPage() {
           );
 
           return (
-            <motion.section
+            <section
               key={category}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
             >
               <h2 className="text-sm font-semibold text-zinc-400 uppercase tracking-wider mb-3">
                 {CATEGORY_LABELS[category] || category}
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {catAchievements.map((achievement, i) => (
-                  <motion.div
+                  <div
                     key={achievement.id}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.05 }}
                     className={`border rounded-xl p-4 transition-colors ${
                       achievement.unlocked
                         ? "bg-amber-500/5 border-amber-500/20"
@@ -180,10 +170,10 @@ export default function AchievementsPage() {
                         )}
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
-            </motion.section>
+            </section>
           );
         })}
       </div>

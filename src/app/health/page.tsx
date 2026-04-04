@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+
 
 interface ServiceCheck {
   name: string;
@@ -95,9 +95,7 @@ export default function HealthPage() {
 
         {/* Overall Status Card */}
         {healthData && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+          <div
             className={`border rounded-lg p-6 mb-8 ${getStatusColor(
               healthData.overall_status
             )}`}
@@ -138,7 +136,7 @@ export default function HealthPage() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
 
         {/* Refresh Button */}
@@ -165,11 +163,8 @@ export default function HealthPage() {
             </div>
           ) : (
             healthData?.services.map((service, index) => (
-              <motion.div
+              <div
                 key={service.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
                 className={`border rounded-lg p-6 ${getStatusColor(
                   service.status
                 )}`}
@@ -213,7 +208,7 @@ export default function HealthPage() {
                     </div>
                   )}
                 </div>
-              </motion.div>
+              </div>
             ))
           )}
         </div>

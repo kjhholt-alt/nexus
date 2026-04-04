@@ -125,19 +125,14 @@ export function RadiantQuests({ onLaunch }: RadiantQuestsProps) {
         </button>
       </div>
 
-      <AnimatePresence mode="popLayout">
-        {quests.map((quest, i) => {
+      <div className="space-y-0">
+        {quests.map((quest) => {
           const catCfg = CATEGORY_CONFIG[quest.category];
           const expanded = expandedId === quest.id;
 
           return (
-            <motion.div
+            <div
               key={quest.id}
-              layout
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 10 }}
-              transition={{ delay: i * 0.05 }}
               className={`border rounded-lg overflow-hidden transition-colors ${catCfg.bg}`}
             >
               <button
@@ -198,10 +193,10 @@ export function RadiantQuests({ onLaunch }: RadiantQuestsProps) {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </motion.div>
+            </div>
           );
         })}
-      </AnimatePresence>
+      </div>
     </div>
   );
 }

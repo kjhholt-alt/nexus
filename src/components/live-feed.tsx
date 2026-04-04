@@ -133,9 +133,7 @@ function HighlightCard({ task, workerType, onClick }: { task: SwarmTask; workerT
   const style = getWorkerStyle(workerType);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
+    <div
       onClick={() => onClick?.(task.id)}
       className="relative rounded-xl p-4 bg-zinc-900/80 backdrop-blur-md border border-amber-500/30 overflow-hidden cursor-pointer"
       style={{
@@ -183,7 +181,7 @@ function HighlightCard({ task, workerType, onClick }: { task: SwarmTask; workerT
           </span>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -436,11 +434,7 @@ export function LiveFeed({ onTaskClick }: { onTaskClick?: (id: string) => void }
 
       {/* Highlights */}
       {highlights.length > 0 && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-        >
+        <div>
           <div className="flex items-center gap-2 mb-3">
             <Trophy className="w-4 h-4 text-amber-400" />
             <h3 className="text-xs font-bold text-amber-400 uppercase tracking-widest">
@@ -458,15 +452,11 @@ export function LiveFeed({ onTaskClick }: { onTaskClick?: (id: string) => void }
               />
             ))}
           </div>
-        </motion.div>
+        </div>
       )}
 
       {/* Live Feed */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3 }}
-      >
+      <div>
         <div className="flex items-center gap-2 mb-3">
           <Radio className="w-4 h-4 text-cyan-400" />
           <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-widest">
@@ -505,7 +495,7 @@ export function LiveFeed({ onTaskClick }: { onTaskClick?: (id: string) => void }
             </div>
           )}
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Activity, CheckCircle2, Footprints, TrendingUp } from "lucide-react";
 import { AgentActivity } from "@/lib/types";
 
@@ -73,18 +72,11 @@ export function StatsBar({ agents }: StatsBarProps) {
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-      {stats.map((stat, i) => (
-        <motion.div
+      {stats.map((stat) => (
+        <div
           key={stat.label}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: i * 0.1 }}
-          whileHover={{
-            scale: 1.02,
-            borderColor: stat.hoverBorder,
-            boxShadow: `0 0 20px ${stat.glowColor}`,
-          }}
-          className={`${stat.bg} ${stat.border} border rounded-lg p-4 backdrop-blur-sm transition-all duration-300 cursor-pointer`}
+          className={`${stat.bg} ${stat.border} border rounded-lg p-4 backdrop-blur-sm transition-all duration-300 cursor-pointer hover:scale-[1.02]`}
+          style={{ ["--glow-color" as string]: stat.glowColor }}
         >
           <div className="flex items-center gap-2 mb-1">
             <stat.icon className={`w-4 h-4 ${stat.color}`} />
@@ -95,7 +87,7 @@ export function StatsBar({ agents }: StatsBarProps) {
           <div className={`text-2xl font-mono font-bold ${stat.color}`}>
             {stat.value}
           </div>
-        </motion.div>
+        </div>
       ))}
     </div>
   );

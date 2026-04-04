@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+// framer-motion removed: was causing SSR hydration opacity bug with Turbopack
 import {
   FileText,
   Search,
@@ -181,9 +181,7 @@ export default function LogsPage() {
     <div className="min-h-screen relative" style={{ backgroundColor: "#0a0a0f" }}>
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
         {/* Header */}
-        <motion.header
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+        <header
           className="flex items-center justify-between"
         >
           <div className="flex items-center gap-4">
@@ -206,13 +204,10 @@ export default function LogsPage() {
             Filters
             <ChevronDown className={`w-4 h-4 transition-transform ${showFilters ? "rotate-180" : ""}`} />
           </button>
-        </motion.header>
+        </header>
 
         {/* Summary Stats */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.1 }}
+        <div
           className="grid grid-cols-1 sm:grid-cols-4 gap-4"
         >
           <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-lg p-4">
@@ -252,14 +247,11 @@ export default function LogsPage() {
             </div>
             <div className="text-2xl font-bold text-purple-50">Real-time</div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Filters Panel */}
         {showFilters && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
+          <div
             className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4 space-y-4"
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -371,14 +363,11 @@ export default function LogsPage() {
                 Clear All Filters
               </button>
             </div>
-          </motion.div>
+          </div>
         )}
 
         {/* Logs List */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
+        <div
           className="bg-zinc-900/50 border border-zinc-800 rounded-lg overflow-hidden"
         >
           {loading ? (
@@ -448,7 +437,7 @@ export default function LogsPage() {
               </button>
             </div>
           )}
-        </motion.div>
+        </div>
       </div>
 
       {/* Log Detail Modal */}
@@ -457,9 +446,7 @@ export default function LogsPage() {
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           onClick={() => setSelectedLog(null)}
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
+          <div
             onClick={(e) => e.stopPropagation()}
             className="bg-zinc-900 border border-zinc-800 rounded-lg max-w-2xl w-full max-h-[80vh] overflow-hidden"
           >
@@ -520,7 +507,7 @@ export default function LogsPage() {
                 </pre>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       )}
     </div>

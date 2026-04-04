@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { motion } from "framer-motion";
+
 import {
   DndContext,
   DragOverlay,
@@ -197,10 +197,7 @@ export default function OpsCenter() {
         {/* PIPELINE VIEW — Workflow progression */}
         {pipelineTasks.length > 0 && (
           <div className="flex-shrink-0 px-2">
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.05 }}
+            <div
               className="rounded-lg border border-zinc-800/40 p-3"
               style={{
                 background: "rgba(10,10,18,0.5)",
@@ -211,17 +208,14 @@ export default function OpsCenter() {
                 workflowTasks={pipelineTasks}
                 workflowName={pipelineName}
               />
-            </motion.div>
+            </div>
           </div>
         )}
 
         {/* MAIN CONTENT — 3-panel layout */}
         <div className="flex-1 min-h-0 px-2 pb-2 flex gap-2">
           {/* LEFT — Kanban (40%) */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.1 }}
+          <div
             className="w-[35%] min-w-0 flex-shrink-0 rounded-lg border border-zinc-800/40 p-2"
             style={{
               background: "rgba(10,10,18,0.5)",
@@ -234,13 +228,10 @@ export default function OpsCenter() {
               onTaskCancel={cancelTask}
               onTaskSelect={handleTaskSelect}
             />
-          </motion.div>
+          </div>
 
           {/* CENTER — Worker Fleet (30%) */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+          <div
             className="w-[30%] min-w-0 flex-shrink-0 rounded-lg border border-zinc-800/40 p-2"
             style={{
               background: "rgba(10,10,18,0.5)",
@@ -253,13 +244,10 @@ export default function OpsCenter() {
               onWorkerSelect={handleWorkerSelect}
               onTaskDropOnWorker={assignTaskToWorker}
             />
-          </motion.div>
+          </div>
 
           {/* RIGHT — Timeline & Details (35%) */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
+          <div
             className="flex-1 min-w-0 rounded-lg border border-zinc-800/40 p-2"
             style={{
               background: "rgba(10,10,18,0.5)",
@@ -274,7 +262,7 @@ export default function OpsCenter() {
               selectedWorker={selectedWorker}
               onClearSelection={handleClearSelection}
             />
-          </motion.div>
+          </div>
         </div>
 
         {/* BOTTOM BAR — Quick Actions + Budget */}

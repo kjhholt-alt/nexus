@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+
 import {
   Settings,
   CheckCircle2,
@@ -177,9 +177,7 @@ export default function SettingsPage() {
     <div className="min-h-screen relative" style={{ backgroundColor: "#0a0a0f" }}>
       <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
         {/* Header */}
-        <motion.header
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+        <header
           className="flex items-center justify-between"
         >
           <div className="flex items-center gap-4">
@@ -201,7 +199,7 @@ export default function SettingsPage() {
           >
             <RefreshCw className="w-4 h-4 text-zinc-400" />
           </button>
-        </motion.header>
+        </header>
 
         {/* Services list */}
         <div className="space-y-3">
@@ -211,11 +209,8 @@ export default function SettingsPage() {
             const isShown = showKeys[service.id];
 
             return (
-              <motion.div
+              <div
                 key={service.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.05 }}
                 className={`bg-zinc-900/50 border rounded-xl p-4 transition-colors ${
                   st === "connected"
                     ? "border-emerald-500/20"
@@ -290,16 +285,13 @@ export default function SettingsPage() {
                     </button>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>
 
         {/* Keyboard shortcuts reference */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
+        <div
           className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl p-4"
         >
           <h2 className="text-sm font-semibold text-zinc-400 uppercase tracking-wider mb-3">
@@ -330,13 +322,10 @@ export default function SettingsPage() {
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Hook setup info */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
+        <div
           className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl p-4"
         >
           <h2 className="text-sm font-semibold text-zinc-400 uppercase tracking-wider mb-2">
@@ -349,7 +338,7 @@ export default function SettingsPage() {
           <div className="bg-[#0a0a12] rounded-lg px-4 py-3 text-xs text-cyan-400 font-mono">
             bash scripts/setup-hooks.sh
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

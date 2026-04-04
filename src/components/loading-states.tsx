@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import {
   SkeletonCard,
   SkeletonStatBox,
@@ -31,15 +30,11 @@ export function TodayPageLoading() {
   return (
     <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
       {/* Stats row */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3"
-      >
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
         {Array.from({ length: 6 }).map((_, i) => (
           <SkeletonStatBox key={i} />
         ))}
-      </motion.div>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Left: Tasks list */}

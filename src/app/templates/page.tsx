@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+
 import { FileText } from "lucide-react";
 import { TemplateLibrary } from "@/components/template-library";
 import { SpawnModal } from "@/components/spawn-modal";
@@ -24,9 +24,7 @@ export default function TemplatesPage() {
     >
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
         {/* Header */}
-        <motion.header
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+        <header
           className="flex items-center gap-4"
         >
           <div className="p-2.5 rounded-xl bg-purple-500/10 border border-purple-500/20">
@@ -40,16 +38,12 @@ export default function TemplatesPage() {
               Reusable goals for one-click agent deployment
             </p>
           </div>
-        </motion.header>
+        </header>
 
         {/* Template library */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.1 }}
-        >
+        <div>
           <TemplateLibrary onLaunch={handleLaunch} />
-        </motion.div>
+        </div>
       </div>
 
       {/* Spawn modal for launching templates */}

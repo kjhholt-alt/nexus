@@ -217,11 +217,8 @@ function TimelineTab({
               : null;
 
             return (
-              <motion.div
+              <div
                 key={event.id}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: Math.min(i * 0.02, 0.5) }}
                 className="relative pl-6 pb-3 group"
               >
                 {/* Dot */}
@@ -275,7 +272,7 @@ function TimelineTab({
                     </p>
                   )}
                 </div>
-              </motion.div>
+              </div>
             );
           })}
 

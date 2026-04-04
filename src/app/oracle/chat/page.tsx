@@ -314,9 +314,7 @@ export default function OracleChatPage() {
       }}
     >
       {/* ── Header ── */}
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
+      <div
         style={{
           display: "flex",
           alignItems: "center",
@@ -415,7 +413,7 @@ export default function OracleChatPage() {
             Dashboard
           </a>
         </div>
-      </motion.div>
+      </div>
 
       {/* ── Messages Area ── */}
       <div
@@ -430,10 +428,7 @@ export default function OracleChatPage() {
       >
         {/* Empty state */}
         {messages.length === 0 && !loading && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+          <div
             style={{
               display: "flex",
               flexDirection: "column",
@@ -444,12 +439,9 @@ export default function OracleChatPage() {
               gap: "24px",
             }}
           >
-            <motion.div
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            >
+            <div>
               <OracleEye size={64} />
-            </motion.div>
+            </div>
             <div style={{ textAlign: "center" }}>
               <h2
                 style={{
@@ -503,7 +495,7 @@ export default function OracleChatPage() {
                 </button>
               ))}
             </div>
-          </motion.div>
+          </div>
         )}
 
         {/* Messages */}
@@ -520,9 +512,7 @@ export default function OracleChatPage() {
       </div>
 
       {/* ── Input Bar ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
+      <div
         style={{
           padding: "12px 20px 16px",
           borderTop: `1px solid ${CARD_BORDER}`,
@@ -616,7 +606,7 @@ export default function OracleChatPage() {
         >
           Oracle sees all Hive data in real-time. Shift+Enter for new line.
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

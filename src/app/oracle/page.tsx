@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -175,13 +175,11 @@ export default function OracleDashboard() {
           fontFamily: "'JetBrains Mono', monospace",
         }}
       >
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+        <div
           style={{ color: GOLD, fontSize: "16px" }}
         >
           Oracle is gathering intelligence...
-        </motion.div>
+        </div>
       </div>
     );
   }
@@ -226,9 +224,7 @@ export default function OracleDashboard() {
       </AnimatePresence>
 
       {/* ── Header ── */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
+      <div
         style={{
           display: "flex",
           alignItems: "center",
@@ -318,13 +314,10 @@ export default function OracleDashboard() {
             </button>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* ── Current Briefing ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
+      <div
         style={{
           background: GOLD_GLOW,
           border: `1px solid ${GOLD_DIM}30`,
@@ -346,13 +339,10 @@ export default function OracleDashboard() {
         <div style={{ fontSize: "13px", color: "#bbb", lineHeight: "1.6" }}>
           {briefing?.summary || "No data available."}
         </div>
-      </motion.div>
+      </div>
 
       {/* ── DECISION QUEUE (full width) ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.15 }}
+      <div
         style={{ marginBottom: "24px" }}
       >
         <SectionHeader title="DECISION QUEUE" count={decisions.length} />
@@ -612,7 +602,7 @@ export default function OracleDashboard() {
             )}
           </AnimatePresence>
         </div>
-      </motion.div>
+      </div>
 
       {/* ── Two-column: Highlights + Health/Budget ── */}
       <div
@@ -624,11 +614,7 @@ export default function OracleDashboard() {
         }}
       >
         {/* ── Today's Highlights ── */}
-        <motion.div
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2 }}
-        >
+        <div>
           <SectionHeader
             title="TODAY'S HIGHLIGHTS"
             count={briefing?.highlights?.length || 0}
@@ -638,11 +624,8 @@ export default function OracleDashboard() {
               <EmptyState text="No completed tasks yet today." />
             ) : (
               briefing.highlights.slice(0, 5).map((h, i) => (
-                <motion.div
+                <div
                   key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 + i * 0.05 }}
                   style={{
                     background: CARD_BG,
                     border: `1px solid ${CARD_BORDER}`,
@@ -678,20 +661,16 @@ export default function OracleDashboard() {
                       {h.completed_at && ` - ${timeAgo(h.completed_at)}`}
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))
             )}
           </div>
-        </motion.div>
+        </div>
 
         {/* ── Right column: Budget + Next Steps stacked ── */}
         <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
           {/* Budget */}
-          <motion.div
-            initial={{ opacity: 0, x: 10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.25 }}
-          >
+          <div>
             <SectionHeader title="BUDGET STATUS" />
             <div
               style={{
@@ -753,14 +732,10 @@ export default function OracleDashboard() {
                 <EmptyState text="No budget data." />
               )}
             </div>
-          </motion.div>
+          </div>
 
           {/* Next Steps */}
-          <motion.div
-            initial={{ opacity: 0, x: 10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
-          >
+          <div>
             <SectionHeader title="NEXT STEPS" />
             <div
               style={{
@@ -793,15 +768,12 @@ export default function OracleDashboard() {
                 <EmptyState text="No tasks queued." />
               )}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
       {/* ── Project Health (full width) ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.35 }}
+      <div
         style={{ marginBottom: "24px" }}
       >
         <SectionHeader title="PROJECT HEALTH" />
@@ -836,7 +808,7 @@ export default function OracleDashboard() {
             <EmptyState text="No active projects tracked." />
           )}
         </div>
-      </motion.div>
+      </div>
 
       {/* ── Footer ── */}
       <div
@@ -911,15 +883,14 @@ function ProgressBar({ value, color }: { value: number; color: string }) {
         overflow: "hidden",
       }}
     >
-      <motion.div
-        initial={{ width: 0 }}
-        animate={{ width: `${Math.min(value, 100)}%` }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+      <div
         style={{
           height: "100%",
           background: color,
           borderRadius: "3px",
           boxShadow: `0 0 8px ${color}40`,
+          width: `${Math.min(value, 100)}%`,
+          transition: "width 0.8s ease-out",
         }}
       />
     </div>

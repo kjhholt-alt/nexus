@@ -122,12 +122,7 @@ export default function CommandCenter() {
       {/* MAIN CONTENT -- 40/60 split */}
       <div className="flex-1 min-h-0 flex">
         {/* LEFT: 3D Factory View (40%) */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4 }}
-          className="w-[40%] flex-shrink-0 relative border-r border-zinc-800/30"
-        >
+        <div className="w-[40%] flex-shrink-0 relative border-r border-zinc-800/30">
           {/* Factory label */}
           <div className="absolute top-2 left-3 z-10 flex items-center gap-1.5">
             <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
@@ -201,17 +196,12 @@ export default function CommandCenter() {
               })()}
             </motion.div>
           )}
-        </motion.div>
+        </div>
 
         {/* RIGHT: Panels (60%) */}
         <div className="flex-1 min-w-0 flex flex-col">
           {/* TOP RIGHT: Mini Kanban */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.4 }}
-            className="h-[35%] flex-shrink-0 p-2 border-b border-zinc-800/30"
-          >
+          <div className="h-[35%] flex-shrink-0 p-2 border-b border-zinc-800/30">
             <div
               className="h-full rounded-lg border border-zinc-800/40 p-2"
               style={{
@@ -221,15 +211,10 @@ export default function CommandCenter() {
             >
               <MiniKanban tasks={tasks} />
             </div>
-          </motion.div>
+          </div>
 
           {/* BOTTOM RIGHT: Live Work Log + Detection List */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.4 }}
-            className="flex-1 min-h-0 p-2 flex flex-col gap-2"
-          >
+          <div className="flex-1 min-h-0 p-2 flex flex-col gap-2">
             <div
               className="flex-1 min-h-0 rounded-lg border border-zinc-800/40 p-2"
               style={{
@@ -255,7 +240,7 @@ export default function CommandCenter() {
             >
               <DetectionList />
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 

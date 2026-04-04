@@ -298,9 +298,7 @@ export default function WorkflowsPage() {
     >
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
         {/* Header */}
-        <motion.header
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+        <header
           className="flex items-center justify-between"
         >
           <div className="flex items-center gap-4">
@@ -321,16 +319,14 @@ export default function WorkflowsPage() {
             <Plus className="w-4 h-4" />
             New Workflow
           </button>
-        </motion.header>
+        </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Workflow list */}
           <div className="space-y-2">
             {workflows.map((wf) => (
-              <motion.button
+              <button
                 key={wf.id}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
                 onClick={() => setSelectedId(wf.id)}
                 className={`w-full text-left p-4 rounded-xl border transition-colors ${
                   selectedId === wf.id
@@ -352,7 +348,7 @@ export default function WorkflowsPage() {
                   <span>{wf.trigger}</span>
                   <span>{wf.run_count} runs</span>
                 </div>
-              </motion.button>
+              </button>
             ))}
 
             {workflows.length === 0 && (
@@ -398,9 +394,7 @@ export default function WorkflowsPage() {
                 </div>
 
                 {runResult && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                  <div
                     className={`text-xs px-3 py-2 rounded-lg ${
                       runResult.startsWith("Error") || runResult.startsWith("Failed")
                         ? "bg-red-500/10 text-red-400 border border-red-500/20"
@@ -408,7 +402,7 @@ export default function WorkflowsPage() {
                     }`}
                   >
                     {runResult}
-                  </motion.div>
+                  </div>
                 )}
 
                 <div className="border-t border-zinc-800/50 pt-4">

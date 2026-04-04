@@ -110,12 +110,8 @@ function ConnectorLine({
     (toStatus === "in_progress" || toStatus === "completed");
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scaleX: 0 }}
-      animate={{ opacity: 1, scaleX: 1 }}
-      transition={{ delay: 0.1 * (index + 1), duration: 0.3 }}
+    <div
       className="flex items-center w-8 sm:w-12 flex-shrink-0 relative"
-      style={{ originX: 0 }}
     >
       {/* Base line */}
       <div className="h-[2px] w-full bg-zinc-800 rounded-full overflow-hidden">
@@ -146,7 +142,7 @@ function ConnectorLine({
           style={{ top: "50%", transform: "translateY(-50%)" }}
         />
       )}
-    </motion.div>
+    </div>
   );
 }
 
@@ -160,10 +156,7 @@ function PipelineNode({ step, index }: { step: PipelineStep; index: number }) {
       : null;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.08 * index, duration: 0.35 }}
+    <div
       className={`
         relative flex flex-col items-center gap-1.5 p-3 rounded-lg border
         ${config.borderColor} ${config.bgColor}
@@ -196,7 +189,7 @@ function PipelineNode({ step, index }: { step: PipelineStep; index: number }) {
       {duration && duration !== "--" && (
         <span className="text-[9px] text-zinc-500 font-mono">{duration}</span>
       )}
-    </motion.div>
+    </div>
   );
 }
 
@@ -239,11 +232,7 @@ export function PipelineView({ workflowTasks, workflowName }: PipelineViewProps)
   const progressPct = total > 0 ? Math.round((completed / total) * 100) : 0;
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.4 }}
-    >
+    <div>
       {/* Header */}
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
@@ -290,6 +279,6 @@ export function PipelineView({ workflowTasks, workflowName }: PipelineViewProps)
           </div>
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 }

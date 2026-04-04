@@ -160,6 +160,18 @@ export default function IdeasPage() {
           </div>
         )}
 
+        {/* Loading Skeleton */}
+        {loading && ideas.length === 0 && (
+          <div className="space-y-4 animate-pulse">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {[1,2,3,4].map(i => <div key={i} className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl p-4 h-20" />)}
+            </div>
+            <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl p-4 space-y-3">
+              {[1,2,3].map(i => <div key={i} className="h-14 bg-zinc-800/30 rounded-lg" />)}
+            </div>
+          </div>
+        )}
+
         {/* Stats */}
         <div
           className="grid grid-cols-2 md:grid-cols-4 gap-3">

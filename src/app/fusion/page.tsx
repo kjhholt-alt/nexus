@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { motion } from "framer-motion";
+// framer-motion removed: was causing SSR hydration opacity bug with Turbopack
 import {
   Layers,
   Activity,
@@ -262,9 +262,7 @@ export default function FusionPage() {
     <div className="min-h-screen relative" style={{ backgroundColor: "#0a0a0f" }}>
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
         {/* Header */}
-        <motion.header
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+        <header
           className="flex items-center justify-between"
         >
           <div className="flex items-center gap-4">
@@ -294,17 +292,14 @@ export default function FusionPage() {
               <RefreshCw className={`w-4 h-4 text-zinc-400 ${loading ? "animate-spin" : ""}`} />
             </button>
           </div>
-        </motion.header>
+        </header>
 
         {loading || !data ? (
           <FusionPageLoading />
         ) : (
           <>
             {/* Top stats row */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.1 }}
+            <div
               className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3"
             >
               <StatCard
@@ -346,15 +341,12 @@ export default function FusionPage() {
                 color="border-zinc-700"
                 sub={`${data.tasks.running} running`}
               />
-            </motion.div>
+            </div>
 
             {/* Two-column layout */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
               {/* Left: Project Health */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
+              <div
                 className="lg:col-span-2 bg-zinc-900/50 border border-zinc-800/50 rounded-xl overflow-hidden"
               >
                 <div className="px-4 py-3 border-b border-zinc-800/50 flex items-center gap-2">
@@ -403,15 +395,12 @@ export default function FusionPage() {
                     ))
                   )}
                 </div>
-              </motion.div>
+              </div>
 
               {/* Right: Cost by model + recent deploys */}
               <div className="space-y-4">
                 {/* Cost by Model */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3 }}
+                <div
                   className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl overflow-hidden"
                 >
                   <div className="px-4 py-3 border-b border-zinc-800/50">
@@ -459,13 +448,10 @@ export default function FusionPage() {
                       )
                     )}
                   </div>
-                </motion.div>
+                </div>
 
                 {/* Recent Deploys */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.4 }}
+                <div
                   className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl overflow-hidden"
                 >
                   <div className="px-4 py-3 border-b border-zinc-800/50 flex items-center gap-2">
@@ -502,14 +488,11 @@ export default function FusionPage() {
                       ))
                     )}
                   </div>
-                </motion.div>
+                </div>
               </div>
             </div>
             {/* Charts Section */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
+            <div
               className="grid grid-cols-1 lg:grid-cols-3 gap-4"
             >
               {/* Model Distribution */}
@@ -550,13 +533,10 @@ export default function FusionPage() {
                   <ProjectActivityChart sessions={rawSessions as any} />
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Git Activity */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
+            <div
               className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl overflow-hidden"
             >
               <div className="px-4 py-3 border-b border-zinc-800/50 flex items-center gap-2">
@@ -606,7 +586,7 @@ export default function FusionPage() {
                   })
                 )}
               </div>
-            </motion.div>
+            </div>
           </>
         )}
       </div>

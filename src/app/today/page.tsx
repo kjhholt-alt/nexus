@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { motion } from "framer-motion";
+
 import {
   Sun, CheckCircle2, XCircle, Clock, Loader2, Brain,
   TrendingUp, DollarSign, Users, Zap, RefreshCw, Rocket, BarChart3,
@@ -128,8 +128,7 @@ export default function TodayPage() {
     <div className="min-h-screen relative" style={{ backgroundColor: "#0a0a0f" }}>
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
         {/* Header */}
-        <motion.header initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
-          className="flex items-center justify-between">
+        <header className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20">
               <Sun className="w-6 h-6 text-amber-400" />
@@ -145,7 +144,7 @@ export default function TodayPage() {
             className="p-2 rounded-lg bg-zinc-800/50 border border-zinc-700/50 hover:border-amber-500/30 transition-colors">
             <RefreshCw className={`w-4 h-4 text-zinc-400 ${loading ? "animate-spin" : ""}`} />
           </button>
-        </motion.header>
+        </header>
 
         {error ? (
           <div className="flex flex-col items-center justify-center py-20 text-red-400 gap-3">
@@ -157,8 +156,7 @@ export default function TodayPage() {
         ) : (
           <>
             {/* Stats row */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}
-              className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
               <StatBox label="Completed" value={data.summary.completed}
                 icon={<CheckCircle2 className="w-4 h-4 text-emerald-400" />} color="border-emerald-500/20" />
               <StatBox label="Failed" value={data.summary.failed}
@@ -171,12 +169,11 @@ export default function TodayPage() {
                 icon={<DollarSign className="w-4 h-4 text-amber-400" />} color="border-amber-500/20" />
               <StatBox label="Sessions" value={data.sessions.total}
                 icon={<Users className="w-4 h-4 text-purple-400" />} color="border-purple-500/20" />
-            </motion.div>
+            </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
               {/* Today's Tasks */}
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
-                className="lg:col-span-2 bg-zinc-900/50 border border-zinc-800/50 rounded-xl overflow-hidden">
+              <div className="lg:col-span-2 bg-zinc-900/50 border border-zinc-800/50 rounded-xl overflow-hidden">
                 <div className="px-4 py-3 border-b border-zinc-800/50 flex items-center gap-2">
                   <Rocket className="w-4 h-4 text-cyan-400" />
                   <h2 className="text-sm font-semibold text-zinc-400 uppercase tracking-wider">
@@ -206,13 +203,12 @@ export default function TodayPage() {
                     ))
                   )}
                 </div>
-              </motion.div>
+              </div>
 
               {/* Right column */}
               <div className="space-y-4">
                 {/* Project Status */}
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
-                  className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl overflow-hidden">
+                <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl overflow-hidden">
                   <div className="px-4 py-3 border-b border-zinc-800/50 flex items-center gap-2">
                     <TrendingUp className="w-4 h-4 text-emerald-400" />
                     <h2 className="text-sm font-semibold text-zinc-400 uppercase tracking-wider">Projects</h2>
@@ -234,11 +230,10 @@ export default function TodayPage() {
                       ))
                     )}
                   </div>
-                </motion.div>
+                </div>
 
                 {/* Agent Rankings */}
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
-                  className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl overflow-hidden">
+                <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl overflow-hidden">
                   <div className="px-4 py-3 border-b border-zinc-800/50 flex items-center gap-2">
                     <Zap className="w-4 h-4 text-amber-400" />
                     <h2 className="text-sm font-semibold text-zinc-400 uppercase tracking-wider">Agent Rankings</h2>
@@ -262,12 +257,11 @@ export default function TodayPage() {
                       ))
                     )}
                   </div>
-                </motion.div>
+                </div>
 
                 {/* Specializations */}
                 {data.specializations.length > 0 && (
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
-                    className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl overflow-hidden">
+                  <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl overflow-hidden">
                     <div className="px-4 py-3 border-b border-zinc-800/50 flex items-center gap-2">
                       <Brain className="w-4 h-4 text-purple-400" />
                       <h2 className="text-sm font-semibold text-zinc-400 uppercase tracking-wider">Intelligence</h2>
@@ -292,15 +286,14 @@ export default function TodayPage() {
                         );
                       })}
                     </div>
-                  </motion.div>
+                  </div>
                 )}
               </div>
             </div>
 
             {/* Charts Section */}
             {data.weekTasks && data.weekSessions && (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}
-                className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 {/* Task Completion Trend */}
                 <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl overflow-hidden">
                   <div className="px-4 py-3 border-b border-zinc-800/50 flex items-center gap-2">
@@ -326,13 +319,12 @@ export default function TodayPage() {
                     <CostTrendChart sessions={data.weekSessions} />
                   </div>
                 </div>
-              </motion.div>
+              </div>
             )}
 
             {/* Analytics Panel (30 Days) */}
             {analytics && (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}
-                className="bg-zinc-900/50 border border-cyan-500/20 rounded-xl overflow-hidden">
+              <div className="bg-zinc-900/50 border border-cyan-500/20 rounded-xl overflow-hidden">
                 <div className="px-4 py-3 border-b border-zinc-800/50 flex items-center gap-2">
                   <Activity className="w-4 h-4 text-cyan-400" />
                   <h2 className="text-sm font-semibold text-zinc-400 uppercase tracking-wider">
@@ -442,7 +434,7 @@ export default function TodayPage() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             )}
           </>
         )}

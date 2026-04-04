@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { motion } from "framer-motion";
 import {
   Clock,
   Cpu,
@@ -290,12 +289,9 @@ export function SessionList({ compact, maxItems }: SessionListProps) {
               </tr>
             </thead>
             <tbody>
-              {displayed.map((session, i) => (
-                <motion.tr
+              {displayed.map((session) => (
+                <tr
                   key={session.session_id}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: i * 0.02 }}
                   onClick={() =>
                     setExpandedId(
                       expandedId === session.session_id
@@ -356,7 +352,7 @@ export function SessionList({ compact, maxItems }: SessionListProps) {
                   <td className="px-4 py-2.5 text-right text-zinc-600 text-xs">
                     {formatTimeAgo(session.last_activity)}
                   </td>
-                </motion.tr>
+                </tr>
               ))}
             </tbody>
           </table>

@@ -14,7 +14,6 @@ import ReactFlow, {
   type NodeTypes,
 } from "reactflow";
 import "reactflow/dist/style.css";
-import { motion } from "framer-motion";
 import type { OpsTask } from "@/lib/ops-types";
 import { getProjectColor } from "@/lib/ops-types";
 
@@ -41,17 +40,14 @@ function TaskNode({ data }: { data: { task: OpsTask; onClick: () => void } }) {
   const projectColor = getProjectColor(task.project);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      whileHover={{ scale: 1.05 }}
+    <div
       onClick={onClick}
       className={`
         relative px-4 py-3 rounded-lg border-2 cursor-pointer
         ${colors.bg} ${colors.border}
         backdrop-blur-sm min-w-[200px] max-w-[280px]
         transition-all duration-200
-        hover:shadow-lg hover:shadow-cyan-500/20
+        hover:shadow-lg hover:shadow-cyan-500/20 hover:scale-105
       `}
       style={{
         borderLeftWidth: "4px",
@@ -92,7 +88,7 @@ function TaskNode({ data }: { data: { task: OpsTask; onClick: () => void } }) {
           </div>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 }
 

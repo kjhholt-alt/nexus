@@ -12,17 +12,21 @@ import {
 
 const NAV_LINKS = [
   { href: "/", label: "Dashboard", color: "text-zinc-400" },
-  { href: "/today", label: "Today", color: "text-amber-400" },
+  { href: "/products", label: "Products", color: "text-cyan-400" },
+  { href: "/ideas", label: "Ideas", color: "text-amber-400" },
+  { href: "/today", label: "Today", color: "text-zinc-400" },
   { href: "/command", label: "Command", color: "text-red-400" },
   { href: "/ops", label: "Ops Center", color: "text-emerald-400" },
   { href: "/game", label: "Factory", color: "text-cyan-400" },
   { href: "/oracle", label: "Oracle", color: "text-amber-400" },
   { href: "/sessions", label: "Sessions", color: "text-purple-400" },
   { href: "/templates", label: "Templates", color: "text-orange-400" },
-  { href: "/workflows", label: "Flows", color: "text-purple-400/60" },
-  { href: "/fusion", label: "Fusion", color: "text-cyan-400/60" },
-  { href: "/achievements", label: "Trophies", color: "text-amber-400/60" },
-  { href: "/setup", label: "Setup", color: "text-emerald-400/60" },
+  { href: "/workflows", label: "Flows", color: "text-purple-400" },
+  { href: "/fusion", label: "Fusion", color: "text-cyan-400" },
+  { href: "/costs", label: "Costs", color: "text-emerald-400" },
+  { href: "/achievements", label: "Trophies", color: "text-amber-400" },
+  { href: "/guide", label: "Guide", color: "text-zinc-400" },
+  { href: "/setup", label: "Setup", color: "text-zinc-400" },
   { href: "/settings", label: "Settings", color: "text-zinc-500" },
 ];
 

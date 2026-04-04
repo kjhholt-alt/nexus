@@ -258,6 +258,35 @@ export default function ProductsPage() {
           </div>
         </div>
 
+        {/* Loading Skeleton */}
+        {loading && products.length === 0 && (
+          <div className="space-y-6 animate-pulse">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-zinc-700" />
+              <div className="h-3 w-24 bg-zinc-800 rounded" />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+              {[1,2,3,4].map(i => (
+                <div key={i} className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl p-4 space-y-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-zinc-800" />
+                    <div className="flex-1 space-y-1.5">
+                      <div className="h-3.5 w-32 bg-zinc-800 rounded" />
+                      <div className="h-2.5 w-48 bg-zinc-800/50 rounded" />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2">
+                    <div className="h-12 bg-zinc-800/30 rounded-lg" />
+                    <div className="h-12 bg-zinc-800/30 rounded-lg" />
+                    <div className="h-12 bg-zinc-800/30 rounded-lg" />
+                  </div>
+                  <div className="h-3 w-40 bg-zinc-800/30 rounded" />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Product Grid by Tier */}
         {tiers.map((tierKey) => {
           const tierProducts = products.filter(p => p.tier === tierKey);

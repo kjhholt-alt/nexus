@@ -221,11 +221,7 @@ export default function SetupPage() {
     >
       <div className="relative z-10 max-w-2xl mx-auto px-4 py-12 space-y-8">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center"
-        >
+        <div className="text-center">
           <div className="inline-flex p-3 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 mb-4">
             <Rocket className="w-8 h-8 text-cyan-400" />
           </div>
@@ -235,7 +231,7 @@ export default function SetupPage() {
           <p className="text-sm text-zinc-500">
             Verify your installation and get the factory running in 2 minutes
           </p>
-        </motion.div>
+        </div>
 
         {/* Progress bar */}
         <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl p-4">
@@ -248,11 +244,9 @@ export default function SetupPage() {
             </span>
           </div>
           <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
-            <motion.div
-              animate={{
-                width: `${(passedCount / steps.length) * 100}%`,
-              }}
-              className="h-full bg-gradient-to-r from-cyan-500 to-emerald-400 rounded-full"
+            <div
+              className="h-full bg-gradient-to-r from-cyan-500 to-emerald-400 rounded-full transition-all duration-500"
+              style={{ width: `${(passedCount / steps.length) * 100}%` }}
             />
           </div>
         </div>
@@ -269,11 +263,8 @@ export default function SetupPage() {
             ];
 
             return (
-              <motion.div
+              <div
                 key={step.id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.1 }}
                 className={`border rounded-xl p-4 transition-colors ${
                   step.status === "pass"
                     ? "border-emerald-500/20 bg-emerald-500/5"
@@ -329,7 +320,7 @@ export default function SetupPage() {
                     <ChevronRight className="w-4 h-4 text-zinc-700" />
                   )}
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>
