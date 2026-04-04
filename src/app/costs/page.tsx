@@ -17,6 +17,7 @@ import {
   Cell,
 } from "recharts";
 import { DollarSign, TrendingUp, AlertTriangle, Plus, Trash2 } from "lucide-react";
+import { ClaudeUsageWidget } from "@/components/claude-usage-widget";
 
 interface CostEntry {
   date: string;
@@ -156,9 +157,14 @@ export default function CostsPage() {
     <div className="min-h-screen bg-[#0a0a0f] text-cyan-50 p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2 text-cyan-400">💰 Cost Tracking</h1>
-          <p className="text-cyan-300/60">API usage costs across all projects</p>
+        <div className="mb-8 flex items-start justify-between gap-6">
+          <div>
+            <h1 className="text-4xl font-bold mb-2 text-cyan-400">💰 Cost Tracking</h1>
+            <p className="text-cyan-300/60">API usage costs across all projects</p>
+          </div>
+          <div className="w-80 shrink-0">
+            <ClaudeUsageWidget />
+          </div>
         </div>
 
         {/* Summary Cards */}
