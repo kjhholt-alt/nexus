@@ -52,7 +52,13 @@ function GlobalNav() {
         <a href="/" className="px-3 py-1 text-[10px] uppercase tracking-wider text-zinc-400 hover:text-white hover:bg-white/5 rounded transition-colors">
           Dashboard
         </a>
-        <a href="/today" className="px-3 py-1 text-[10px] uppercase tracking-wider text-amber-400 hover:text-amber-300 hover:bg-amber-500/10 rounded transition-colors">
+        <a href="/products" className="px-3 py-1 text-[10px] uppercase tracking-wider text-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10 rounded transition-colors font-bold">
+          Products
+        </a>
+        <a href="/ideas" className="px-3 py-1 text-[10px] uppercase tracking-wider text-amber-400 hover:text-amber-300 hover:bg-amber-500/10 rounded transition-colors">
+          Ideas
+        </a>
+        <a href="/today" className="px-3 py-1 text-[10px] uppercase tracking-wider text-zinc-400 hover:text-white hover:bg-white/5 rounded transition-colors">
           Today
         </a>
         <a href="/command" className="px-3 py-1 text-[10px] uppercase tracking-wider text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded transition-colors font-bold">
@@ -87,6 +93,9 @@ function GlobalNav() {
         </a>
         <a href="/setup" className="px-3 py-1 text-[10px] uppercase tracking-wider text-emerald-400/60 hover:text-emerald-300 hover:bg-emerald-500/10 rounded transition-colors">
           Setup
+        </a>
+        <a href="/guide" className="px-3 py-1 text-[10px] uppercase tracking-wider text-cyan-400/60 hover:text-cyan-300 hover:bg-cyan-500/10 rounded transition-colors">
+          Guide
         </a>
         <a href="/settings" className="px-3 py-1 text-[10px] uppercase tracking-wider text-zinc-500 hover:text-white hover:bg-white/5 rounded transition-colors">
           Settings
