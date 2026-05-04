@@ -281,39 +281,21 @@ function cleanResponseText(text: string): string {
 
 // ── Call Claude API ──────────────────────────────────────────────────────────
 
+// Claude transport: claudex (Max-sub `claude -p` subprocess) — no API key.
+// @ts-expect-error vendored sibling JS (paired claudex.d.ts available)
+import { ask } from "@/lib/claudex.js";
+
 async function callClaude(systemPrompt: string, messages: Array<{ role: string; content: string }>): Promise<string> {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) {
-    throw new Error("ANTHROPIC_API_KEY not set");
-  }
-
-  const claudeMessages = messages.map((m) => ({
-    role: m.role === "oracle" ? "assistant" : "user",
-    content: m.content,
-  }));
-
-  const response = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-api-key": apiKey,
-      "anthropic-version": "2023-06-01",
-    },
-    body: JSON.stringify({
-      model: "claude-haiku-4-5-20251001",
-      max_tokens: 1024,
-      system: systemPrompt,
-      messages: claudeMessages,
-    }),
+  const turns = messages.map((m) => {
+    const role = m.role === "oracle" ? "assistant" : "user";
+    return `<${role}>\n${m.content}\n</${role}>`;
   });
-
-  if (!response.ok) {
-    const err = await response.text();
-    throw new Error(`Claude API error: ${response.status} - ${err}`);
-  }
-
-  const data = await response.json();
-  return data.content?.[0]?.text || "I seem to be having trouble forming a response. Please try again.";
+  const prompt =
+    `<system>\n${systemPrompt}\n</system>\n\n` +
+    turns.join("\n\n") +
+    "\n\n<assistant>";
+  const r = await ask(prompt, { useCache: true, timeoutMs: 60_000 });
+  return r.text || "I seem to be having trouble forming a response. Please try again.";
 }
 
 // ── POST Handler ─────────────────────────────────────────────────────────────

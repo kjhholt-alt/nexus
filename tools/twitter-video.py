@@ -78,11 +78,9 @@ def check_dependencies() -> list[str]:
     except (FileNotFoundError, subprocess.TimeoutExpired):
         missing.append("ffmpeg  (winget install ffmpeg)")
 
-    # Check anthropic
-    try:
-        import anthropic  # noqa: F401
-    except ImportError:
-        missing.append("anthropic  (pip install anthropic)")
+    # Claude transport is claudex (Max-sub `claude -p`) — no SDK dep.
+    # The Vision analysis path is currently disabled (claude -p is text-only).
+    # The download + frame extraction parts of this tool still work.
 
     return missing
 
@@ -263,58 +261,23 @@ def extract_frames(video_path: str, num_frames: int = 8) -> list[str]:
 def analyze_with_claude(
     frames: list[str],
     metadata: dict,
-    model: str = "claude-haiku-4-5-20251001",
+    model: str = "claude-cli",
 ) -> str:
-    """Send extracted frames to Claude Vision for analysis.
+    """DISABLED: Vision analysis required the Anthropic SDK and a per-project Claude key.
 
-    Uses Haiku by default for speed/cost. Pass model="claude-sonnet-4-5-20250514"
-    for deeper analysis.
+    Migration to claudex (Max-sub `claude -p` subprocess) removed both. The CLI
+    in -p mode is text-only and does not currently accept image attachments,
+    so this Vision-based analyzer is not portable to the new transport.
+
+    The download + frame extraction parts of this script still work — frames
+    land in DOWNLOADS_DIR. Manually drop them into a Claude Code session for
+    Vision analysis until claudex (or a future `claude -p`) supports images.
     """
-    from anthropic import Anthropic
-
-    client = Anthropic()
-
-    uploader = metadata.get("uploader") or metadata.get("uploader_id") or "unknown"
-    description = metadata.get("description") or metadata.get("title") or "N/A"
-
-    content: list[dict] = []
-    content.append({
-        "type": "text",
-        "text": (
-            f"These are {len(frames)} frames extracted from a Twitter/X video "
-            f"by @{uploader}.\n"
-            f"Tweet text: \"{description}\"\n\n"
-            f"Analyze this video in detail:\n"
-            f"1. What product, tool, app, or concept is being shown?\n"
-            f"2. What does the UI/interface look like? Describe layout, colors, components.\n"
-            f"3. What features or capabilities are being demonstrated?\n"
-            f"4. What is the visual design aesthetic?\n"
-            f"5. What makes this noteworthy or impressive?\n"
-            f"6. Any text visible on screen (code, labels, URLs)?\n"
-            f"7. Step-by-step walkthrough of what happens in the video.\n\n"
-            f"Be specific and detailed. This analysis will be used as reference material."
-        ),
-    })
-
-    for frame_path in frames:
-        with open(frame_path, "rb") as f:
-            img_data = base64.standard_b64encode(f.read()).decode("utf-8")
-        content.append({
-            "type": "image",
-            "source": {
-                "type": "base64",
-                "media_type": "image/jpeg",
-                "data": img_data,
-            },
-        })
-
-    response = client.messages.create(
-        model=model,
-        max_tokens=4000,
-        messages=[{"role": "user", "content": content}],
+    return (
+        "[claudex limitation] Vision analysis disabled — claude -p does not yet "
+        f"accept image input. {len(frames)} frames are saved on disk; open them "
+        "in an interactive Claude Code session for analysis."
     )
-
-    return response.content[0].text
 
 
 # ── Playwright fallback ──────────────────────────────────────────────────────
@@ -329,8 +292,6 @@ def analyze_with_playwright(url: str, num_screenshots: int = 6) -> str:
         from playwright.sync_api import sync_playwright
     except ImportError:
         return "Playwright not installed. Run: pip install playwright && python -m playwright install chromium"
-
-    from anthropic import Anthropic
 
     frames_dir = DOWNLOADS_DIR / "playwright_frames"
     frames_dir.mkdir(parents=True, exist_ok=True)
@@ -405,14 +366,12 @@ def analyze_with_playwright(url: str, num_screenshots: int = 6) -> str:
             },
         })
 
-    client = Anthropic()
-    response = client.messages.create(
-        model="claude-haiku-4-5-20251001",
-        max_tokens=4000,
-        messages=[{"role": "user", "content": content}],
+    # Vision analysis disabled — see analyze_with_claude() above for context.
+    return (
+        f"[claudex limitation] Playwright captured {len(screenshot_paths)} screenshots "
+        f"in {frames_dir}. Open them in an interactive Claude Code session for analysis "
+        "(claude -p is text-only)."
     )
-
-    return response.content[0].text
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────

@@ -75,8 +75,8 @@ try {
             $psi.RedirectStandardError = $true
             $psi.CreateNoWindow = $true
 
-            # Pass environment variables
-            foreach ($key in @("ANTHROPIC_API_KEY", "NEXUS_URL", "SUPABASE_URL", "SUPABASE_KEY",
+            # Pass environment variables (Claude transport is claudex / `claude -p`, no API key)
+            foreach ($key in @("NEXUS_URL", "SUPABASE_URL", "SUPABASE_KEY",
                               "NEXT_PUBLIC_SUPABASE_URL", "NEXT_PUBLIC_SUPABASE_ANON_KEY",
                               "NEXUS_API_KEY", "DISCORD_WEBHOOK_URL", "CLAUDE_CLI_PATH")) {
                 $val = [System.Environment]::GetEnvironmentVariable($key, "Process")

@@ -10,12 +10,11 @@ Configure in ~/.claude.json:
     "mcpServers": {
         "nexus-tools": {
             "command": "python",
-            "args": ["C:/Users/Kruz/Desktop/Projects/nexus/tools/mcp_server.py"],
-            "env": {
-                "ANTHROPIC_API_KEY": "..."
-            }
+            "args": ["C:/Users/Kruz/Desktop/Projects/nexus/tools/mcp_server.py"]
         }
     }
+
+Claude calls go through claudex (Max-sub `claude -p`) — no API key needed.
 """
 
 import importlib.util

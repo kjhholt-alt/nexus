@@ -15,8 +15,7 @@ SUPABASE_KEY = os.environ.get(
     "SUPABASE_KEY",
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0dnRhb3JnaXR5Y3pyZGhoenF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA5MzY4MTEsImV4cCI6MjA4NjUxMjgxMX0.A2uG-yVQ1HSV9-zlNDAztHHVw25g1cQ43180y3TfwGk",
 )
-# ANTHROPIC_API_KEY no longer needed — all workers use Claude Code CLI (free on Max plan)
-ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")  # Kept for backward compat only
+# Claude API key removed — all workers use Claude Code CLI (Max-sub) via claudex.
 NEXUS_URL = os.environ.get(
     "NEXUS_URL",
     os.environ.get("MISSION_CONTROL_URL", "https://nexus.buildkit.store"),

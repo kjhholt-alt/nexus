@@ -37,13 +37,6 @@ const SERVICES: ServiceConfig[] = [
     required: true,
   },
   {
-    id: "anthropic",
-    name: "Anthropic (Claude)",
-    description: "AI model API for Oracle and agent tasks",
-    envKey: "ANTHROPIC_API_KEY",
-    required: false,
-  },
-  {
     id: "discord",
     name: "Discord Webhook",
     description: "Notifications for missions, deploys, and alerts",

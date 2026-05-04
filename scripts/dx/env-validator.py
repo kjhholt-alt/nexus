@@ -9,7 +9,7 @@ REQUIRED = {
 }
 
 OPTIONAL = {
-    "ANTHROPIC_API_KEY": "Claude API key",
+    # Claude calls go through claudex (Max-sub `claude -p`) — no API key.
     "NEXUS_API_KEY": "Nexus API auth key",
     "DISCORD_WEBHOOK_URL": "Discord notifications",
 }
